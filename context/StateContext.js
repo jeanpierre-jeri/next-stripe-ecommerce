@@ -75,7 +75,10 @@ export const ContextProvider = ({ children }) => {
         onAdd,
         setShowCart,
         onRemove,
-        toggleCartItemQuantity
+        toggleCartItemQuantity,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities
       }}
     >
       {children}

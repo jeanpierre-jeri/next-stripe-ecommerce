@@ -12,7 +12,7 @@ export default function ProductDetails({ product, products }) {
   const [qty, setQty] = useState(1)
   const [index, setIndex] = useState(0)
 
-  const { onAdd } = useGlobalContext()
+  const { onAdd, setShowCart } = useGlobalContext()
 
   useEffect(() => {
     setQty(1)
@@ -27,6 +27,12 @@ export default function ProductDetails({ product, products }) {
       if (prevState - 1 < 1) return 1
       return prevState - 1
     })
+  }
+
+  const handleBuyNow = () => {
+    onAdd(product, qty)
+
+    setShowCart(true)
   }
 
   return (
@@ -78,7 +84,7 @@ export default function ProductDetails({ product, products }) {
             <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>
               Add to Cart
             </button>
-            <button type="button" className="buy-now" onClick="">
+            <button type="button" className="buy-now" onClick={handleBuyNow}>
               Buy Now
             </button>
           </div>
@@ -88,7 +94,7 @@ export default function ProductDetails({ product, products }) {
       <div className="maylike-products-wrapper">
         <h2>You may also like</h2>
         <div className="marquee">
-          <div className={`maylike-products-container ${products?.length > 4 ? 'track' : null}`}>
+          <div className={`maylike-products-container track`}>
             {products?.map((item) => (
               <Product key={item._id} product={item} />
             ))}

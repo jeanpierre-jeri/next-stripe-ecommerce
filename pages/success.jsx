@@ -5,9 +5,18 @@ import Link from 'next/link'
 import { BsBagCheckFill } from 'react-icons/bs'
 
 import { useGlobalContext } from '../context/StateContext'
+import { runFireworks } from '../lib/utils'
 
 export default function Success() {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useGlobalContext()
+
+  useEffect(() => {
+    localStorage.clear()
+    setCartItems([])
+    setTotalPrice(0)
+    setTotalQuantities(0)
+    runFireworks()
+  }, [setCartItems, setTotalPrice, setTotalQuantities])
 
   return (
     <div className="success-warpper">
@@ -23,6 +32,11 @@ export default function Success() {
             orders@example.com
           </a>
         </p>
+        <Link href="/">
+          <button type="button" width="300px" className="btn">
+            Continue Shopping
+          </button>
+        </Link>
       </div>
     </div>
   )
